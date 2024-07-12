@@ -1,14 +1,14 @@
-# Use the official openjdk image as the base image
-FROM openjdk:11-jdk-slim
+# Use the official OpenJDK image from the Docker Hub
+FROM openjdk:11
 
-# Set the working directory in the Docker container
-WORKDIR /OlaUnicamp
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy the HelloWorld.java file into the Docker container
-COPY OlaUnicamp.java .
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Compile the HelloWorld.java file
+# Compile the Java program
 RUN javac OlaUnicamp.java
 
-# Specify the command to run when the Docker container starts
+# Run the Java program
 CMD ["java", "OlaUnicamp"]
