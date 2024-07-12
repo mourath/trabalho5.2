@@ -9,24 +9,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    // Pull the latest version of the Docker image
-                    docker.image('openjdk:11').inside {
-                        // Compile the Java program
-                        sh 'javac OlaUnicamp.java'
-                    }
-                }
+                sh"""
+                docker build -t ola-unicamp-java .
+                """
             }
         }
         
         stage('Run') {
             steps {
-                script {
-                    // Run the Java program in the Docker container
-                    docker.image('openjdk:11').inside {
-                        sh 'java OlaUnicamp'
-                    }
-                }
+                sh"""
+                docker run ola-unicamp-java
+                """
+            }
             }
         }
     }
